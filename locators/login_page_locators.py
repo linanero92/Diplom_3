@@ -1,3 +1,6 @@
+from selenium.webdriver.common.by import By
+
+
 SEARCH_LOGIN_BUTTON = (By.XPATH, '//form[contains(@class, "Auth_form")]//button[text()="Войти"]')
 SEARCH_ERROR_INVALID_PASSWORD = (
     By.XPATH, '//div[contains(@class, "input__container")]//p[text()="Некорректный пароль"]')

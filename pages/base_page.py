@@ -4,16 +4,12 @@ from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver import ActionChains
 
 
+
 class BasePage:
 
     @allure.step('Инициализация веб-драйвера')
     def __init__(self, driver):
         self.driver = driver
-
-    @allure.step('Определение метода driver')
-    def driver(self):
-        driver = None
-        return driver
 
     @allure.step('Ожидание открытия новой вкладки в браузере')
     def wait_for_window_opened(self, number):
@@ -24,14 +20,23 @@ class BasePage:
         WebDriverWait(self.driver, 5).until(expected_conditions.visibility_of_element_located(locator))
         return self.driver.find_element(*locator)
 
+    @allure.step('Отображение эдемента')
+    def check_displaying_of_element(self, locator):
+        return self.find_element_with_wait(locator).is_displayed()
+
+    @allure.step('Кликабельность эдемента')
+    def check_element_is_clickable(self, locator):
+        WebDriverWait(self.driver, 10).until(expected_conditions.element_to_be_clickable(locator))
+        return self.find_element_with_wait(locator)
+
     @allure.step('Клик по элементу')
     def click_to_element(self, locator):
         WebDriverWait(self.driver, 7).until(expected_conditions.element_to_be_clickable(locator))
-        self.driver.find_element(*locator).click()
+        self.find_element_with_wait(locator).click()
 
     @allure.step('Добавление текста в элемент')
     def add_text_to_element(self, locator, text):
-        self.find_element_with_wait(locator).send_keys(text)
+        self.driver.find_element(*locator).send_keys(text)
 
     @allure.step('Получение текста из элемента')
     def get_text_from_element(self, locator):
@@ -74,3 +79,7 @@ class BasePage:
                 simulateHTML5DragAndDrop(arguments[0], arguments[1]);
                 """
         self.driver.execute_script(script, source_element, target_element)
+
+    def double_click_element(self, element):
+        action = ActionChains(self.driver)
+        action.double_click(element).perform()
