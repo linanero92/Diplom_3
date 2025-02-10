@@ -1,11 +1,10 @@
 import pytest
-import requests
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options as ChromeOptions
 from selenium.webdriver.firefox.options import Options as FirefoxOptions
-
-import data
+import requests
 import urls
+import data
 from helpers import Generator
 
 
@@ -28,7 +27,7 @@ def driver(request):
     driver.quit()
 
 
-@pytest.fixture()
+@pytest.fixture
 def create_new_user_and_delete():
     email = Generator.generate_random_email(5)
     password = Generator.generate_random_string(7)

@@ -11,7 +11,6 @@ class BasePage:
     def __init__(self, driver):
         self.driver = driver
 
-
     @allure.step('Ожидание открытия новой вкладки в браузере')
     def wait_for_window_opened(self, number):
         WebDriverWait(self.driver, 7).until(expected_conditions.number_of_windows_to_be(number))
@@ -41,7 +40,8 @@ class BasePage:
     @allure.step('Клик по элементу')
     def click_to_element(self, locator):
         WebDriverWait(self.driver, 15).until(expected_conditions.element_to_be_clickable(locator))
-        self.find_element_with_wait(locator).click()
+        return self.find_element_with_wait(locator)
+
 
     @allure.step('Добавление текста в элемент')
     def add_text_to_element(self, locator, text):

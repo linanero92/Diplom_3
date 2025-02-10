@@ -1,12 +1,22 @@
 import allure
 from helpers import Generator
 from locators.password_recovery_locators import PasswordRecoveryLocators
-from pages.base_page import BasePage
 from pages.main_page import MainPage
 from pages.login_page import LoginPage
+from locators.main_page_locators import MainPageLocators
+from pages.base_page import BasePage
+
 
 
 class PasswordRecoveryPage(BasePage):
+
+    def click_go_to_login_button(self):
+        self.check_element_is_clickable(MainPageLocators.SEARCH_LOGIN_BUTTON_VIA_MAINPAGE)
+        self.click_to_element(MainPageLocators.SEARCH_LOGIN_BUTTON_VIA_MAINPAGE)
+
+    def click_to_recovery_password_link(self):
+        self.check_element_is_clickable(PasswordRecoveryLocators.SEARCH_PASSWORD_RECOVERY_LINK_VIA_LOGIN_PAGE)
+        self.click_to_element(PasswordRecoveryLocators.SEARCH_PASSWORD_RECOVERY_LINK_VIA_LOGIN_PAGE)
 
     def enter_email_to_recovery_password(self):
         generator = Generator()
@@ -24,7 +34,6 @@ class PasswordRecoveryPage(BasePage):
         main_page.click_login_button()
         login_page = LoginPage(self.driver)
         login_page.click_to_recovery_password_link()
-        self.enter_email_to_recovery_password()
 
     def click_password_make_visible_hidden(self):
         self.check_element_is_clickable(PasswordRecoveryLocators.SEARCH_ICON_PASSWORD_RECOVERY_MAKE_VISIBLE)

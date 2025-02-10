@@ -3,7 +3,6 @@ from selenium.webdriver.common.by import By
 
 class PasswordRecoveryLocators:
 
-
     SEARCH_EMAIL_INPUT_VIA_PASSWORD_RECOVERY = (By.XPATH,
     '//div[@class="input pr-6 pl-6 input_type_text input_size_default"]/input[@class="text input__textfield text_type_main-default"]')
     SEARCH_RECOVERY_PASSWORD_BUTTON = (By.XPATH,
