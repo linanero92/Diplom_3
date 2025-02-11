@@ -1,5 +1,4 @@
 from locators.main_page_locators import MainPageLocators
-from locators.order_feed_page_locators import OrderFeedPageLocators
 from pages.base_page import BasePage
 from pages.account_page import AccountPage
 import data
@@ -27,12 +26,15 @@ class MainPage(BasePage):
         self.click_account_button()
         self.click_constructor_link()
 
-    def get_feed_after_login(self):
+    def close_modal_for_ff(self):
         account_page = AccountPage(self.driver)
         if data.DRIVER_NAME == data.browser_firefox:
             account_page.close_modal()
-        self.get_feed()
-        self.get_feed()
+
+    def close_modal_for_chrome(self):
+        account_page = AccountPage(self.driver)
+        if data.DRIVER_NAME == data.browser_chrome:
+            account_page.close_modal()
 
     def check_constructor_title(self):
         return self.get_text_from_element(MainPageLocators.SEARCH_CONSTRUCTOR_TITLE_TEXT)
@@ -76,6 +78,20 @@ class MainPage(BasePage):
     def check_order_id_text(self):
         return self.get_text_from_element(MainPageLocators.SEARCH_ORDER_ID_TEXT)
 
+    def wait_and_get_order_id(self):
+        order_id = '9999'
+        while order_id == '9999':
+            order_id = self.get_text_from_element(MainPageLocators.SEARCH_ORDER_ID_IN_MODAL)
+        return order_id
+
+    def check_order_id(self):
+        element_text = self.get_text_from_element(MainPageLocators.SEARCH_ORDER_ID_IN_MODAL)
+        return element_text
+
     def make_order(self):
         self.add_ingredient()
         self.click_make_order_button()
+
+    def close_new_order_modal(self):
+        close_button = self.find_element_with_wait(MainPageLocators.SEARCH_CLOSE_MADE_ORDER_BUTTON)
+        self.js_button_click(close_button)

@@ -1,4 +1,3 @@
-import allure
 from pages.main_page import MainPage
 from pages.login_page import LoginPage
 from pages.account_page import AccountPage
@@ -27,7 +26,9 @@ class TestMainPage:
         email, password, _ = create_new_user_and_delete
         login_page = LoginPage(driver)
         login_page.user_login(email, password)
-        main_page.get_feed_after_login()
+        main_page.close_modal_for_ff()
+        main_page.get_feed()
+        main_page.get_feed()
         order_feed_page = OrderFeedPage(driver)
         expected_result = 'Лента заказов'
         assert order_feed_page.check_feed_title_text() == expected_result
@@ -62,4 +63,3 @@ class TestMainPage:
         main_page.make_order()
         expected_result = 'идентификатор заказа'
         assert main_page.check_order_id_text() == expected_result
-

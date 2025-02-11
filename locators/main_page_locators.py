@@ -31,3 +31,6 @@ class MainPageLocators:
     SEARCH_TARGET_BASKET = (By.XPATH, '//span[@class="constructor-element__text" and text()="Перетяните булочку сюда (низ)"]')
     SEARCH_ORDER_ID_TEXT = (By.XPATH, '//p[contains(@class, "undefined") and contains(@class, "text") and contains(@class, "text_type_main-medium") and contains(@class, "mb-15") and text()="идентификатор заказа"]')
     SEARCH_MAKE_ORDER_BUTTON = (By.XPATH, '//button[contains(@class, "button_button__") and contains(@class, "button_button_type_primary__") and contains(@class, "button_button_size_large__") and text()="Оформить заказ"]')
+    SEARCH_CLOSE_MADE_ORDER_BUTTON = (By.XPATH, '//button[contains(@class, "Modal_modal__close_modified") and contains(@class, "Modal_modal__close")]')
+    SEARCH_FOR_INVISIBILITY_OF_9999_IN_ORDER_MODAL = (By.XPATH, '//h2[contains(@class, "Modal_modal__title") and text()="9999"]')
+    SEARCH_ORDER_ID_IN_MODAL = (By.XPATH, './/h2[contains(@class, "Modal_modal__title_shadow")]')

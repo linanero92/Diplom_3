@@ -1,4 +1,3 @@
-import allure
 import data
 from locators.account_page_locators import AccountPageLocators
 from pages.base_page import BasePage
@@ -41,3 +40,8 @@ class AccountPage(BasePage):
     def get_login_button_from_login_page(self):
         login_page = LoginPage(self.driver)
         return login_page.get_login_button_text()
+
+    def get_order_id_in_history(self):
+        self.element_is_displayed(AccountPageLocators.SEARCH_ORDER_ID_IN_HISTORY)
+        element_text =  self.get_text_from_element(AccountPageLocators.SEARCH_ORDER_ID_IN_HISTORY)
+        return element_text.lstrip('#')

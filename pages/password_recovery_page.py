@@ -1,11 +1,10 @@
-import allure
 from helpers import Generator
 from locators.password_recovery_locators import PasswordRecoveryLocators
+from locators.login_page_locators import LoginPageLocators
 from pages.main_page import MainPage
 from pages.login_page import LoginPage
 from locators.main_page_locators import MainPageLocators
 from pages.base_page import BasePage
-
 
 
 class PasswordRecoveryPage(BasePage):
@@ -15,13 +14,13 @@ class PasswordRecoveryPage(BasePage):
         self.click_to_element(MainPageLocators.SEARCH_LOGIN_BUTTON_VIA_MAINPAGE)
 
     def click_to_recovery_password_link(self):
-        self.check_element_is_clickable(PasswordRecoveryLocators.SEARCH_PASSWORD_RECOVERY_LINK_VIA_LOGIN_PAGE)
-        self.click_to_element(PasswordRecoveryLocators.SEARCH_PASSWORD_RECOVERY_LINK_VIA_LOGIN_PAGE)
+        self.check_element_is_clickable(LoginPageLocators.SEARCH_PASSWORD_RECOVERY_LINK_VIA_LOGIN_PAGE)
+        self.click_to_element(LoginPageLocators.SEARCH_PASSWORD_RECOVERY_LINK_VIA_LOGIN_PAGE)
 
     def enter_email_to_recovery_password(self):
         generator = Generator()
-        self.check_element_is_clickable(PasswordRecoveryLocators.SEARCH_EMAIL_INPUT_VIA_PASSWORD_RECOVERY)
-        self.click_to_element(PasswordRecoveryLocators.SEARCH_EMAIL_INPUT_VIA_PASSWORD_RECOVERY)
+        self.check_element_is_clickable(PasswordRecoveryLocators.SEARCH_RECOVERY_EMAIL_INPUT_FOCUSED)
+        self.click_to_element(PasswordRecoveryLocators.SEARCH_RECOVERY_EMAIL_INPUT_FOCUSED)
         self.add_text_to_element(PasswordRecoveryLocators.SEARCH_RECOVERY_EMAIL_INPUT_FOCUSED,
                                  generator.generate_random_email(5))
         self.click_to_element(PasswordRecoveryLocators.SEARCH_RECOVERY_PASSWORD_BUTTON)

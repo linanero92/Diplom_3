@@ -1,7 +1,5 @@
 import random
 import string
-from urls import *
-import allure
 
 
 class Generator:

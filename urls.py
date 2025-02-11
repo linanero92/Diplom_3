@@ -4,7 +4,7 @@ ACCOUNT_URL = 'https://stellarburgers.nomoreparties.site/account/profile'
 ORDER_FEED_URL = 'https://stellarburgers.nomoreparties.site/feed'
 PASSWORD_RECOVERY_URL = 'https://stellarburgers.nomoreparties.site/forgot-password'
 RESET_PASSWORD_URL = 'https://stellarburgers.nomoreparties.site/reset-password'
-ORDER_HISTORY_URL = 'https://stellarburgers.nomoreparties.site/reset-password'
+ORDER_HISTORY_URL = 'https://stellarburgers.nomoreparties.site/account/order-history'
 USER_REGISTER_ENDPOINT = 'https://stellarburgers.nomoreparties.site/api/auth/register'
 USER_DELETE_ENDPOINT = 'https://stellarburgers.nomoreparties.site/api/auth/user'
 

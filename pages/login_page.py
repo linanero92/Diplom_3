@@ -28,5 +28,3 @@ class LoginPage(BasePage):
 
     def get_login_button_text(self):
         return self.get_text_from_element(LoginPageLocators.SEARCH_LOGIN_BUTTON)
-
-

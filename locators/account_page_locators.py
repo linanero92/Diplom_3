@@ -8,3 +8,4 @@ class AccountPageLocators:
     SEARCH_MODAL_FF = (By.CSS_SELECTOR, "[class*='Modal_modal_overlay__']")
     SEARCH_MODAL_CLOSE_FOR_FF = (By.XPATH, '//button[@class="close-modal-button"]')
     SEARCH_HEADER_ACCOUNT_PAGE = (By.XPATH, '//a[contains(@class, "AppHeader_header__link")]')
+    SEARCH_ORDER_ID_IN_HISTORY = (By.XPATH, './/p[contains(@class, "text") and contains(@class, "text_type_digits-default")]')
