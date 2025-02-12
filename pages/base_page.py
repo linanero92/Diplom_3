@@ -11,25 +11,19 @@ class BasePage:
     def __init__(self, driver):
         self.driver = driver
 
-    def wait_for_visibility(self, locator):
-        WebDriverWait(self.driver, 30).until(expected_conditions.visibility_of_element_located(locator))
-
     @allure.step('Поиск элемента')
     def find_element_with_wait(self, locator):
-        WebDriverWait(self.driver, 8).until(expected_conditions.visibility_of_element_located(locator))
+        WebDriverWait(self.driver, 7).until(expected_conditions.visibility_of_element_located(locator))
         return self.driver.find_element(*locator)
-
-    @allure.step('Отображение эдемента')
-    def check_displaying_of_element(self, locator):
-        return self.find_element_with_wait(locator).is_displayed()
 
     @allure.step('Кликабельность элемента')
     def check_element_is_clickable(self, locator):
-        WebDriverWait(self.driver, 15).until(expected_conditions.element_to_be_clickable(locator))
+        WebDriverWait(self.driver, 5).until(expected_conditions.element_to_be_clickable(locator))
         return self.find_element_with_wait(locator)
 
+    @allure.step('Ожидание для закрытия скрытого мадального окна')
     def wait_for_modal_closed(self, driver, locator):
-        wait = WebDriverWait(driver, 3)
+        wait = WebDriverWait(driver, 2)
         try:
             element = wait.until(expected_conditions.invisibility_of_element_located(locator))
             return element
@@ -38,8 +32,8 @@ class BasePage:
 
     @allure.step('Клик по элементу')
     def click_to_element(self, locator):
-        WebDriverWait(self.driver, 15).until(expected_conditions.element_to_be_clickable(locator))
-        self.driver.find_element(*locator).click()
+        WebDriverWait(self.driver, 3).until(expected_conditions.element_to_be_clickable(locator))
+        self.find_element_with_wait(locator).click()
 
     @allure.step('Добавление текста в элемент')
     def add_text_to_element(self, locator, text):
@@ -53,31 +47,33 @@ class BasePage:
     def scroll_into_view_js(self, locator):
         self.driver.execute_script("arguments[0].scrollIntoView(true);", locator)
 
+    @allure.step('Ожидание исчезновения элемента из видимости')
     def wait_disappear_element(self, locator):
-        WebDriverWait(self.driver, 100).until(expected_conditions.invisibility_of_element_located(locator))
+        WebDriverWait(self.driver, 10).until(expected_conditions.invisibility_of_element_located(locator))
 
+    # работает только в chrome
+    @allure.step('Скролл до нужного элемента')
     def scroll_into_view(self, locator):
         element = self.find_element_with_wait(locator)
         actions = ActionChains(self.driver)
         actions.move_to_element(element).perform()
 
-    @allure.step('Форматирование локатора')
-    def format_locators(self, locator, num):
-        return [locator[0], locator[1].format(num)]
-
     @allure.step("Получение текущего URL")
     def get_current_url(self):
         return self.driver.current_url
 
+    @allure.step('Отображение эдемента')
     def element_is_displayed(self, locator):
         return self.find_element_with_wait(locator).is_displayed()
 
+    @allure.step('Перетаскивание элемента с одного места на другое для Chrome')
     def move_the_element(self, locator_element, locator_target):
         element = self.find_element_with_wait(locator_element)
         target = self.find_element_with_wait(locator_target)
         action_chains = ActionChains(self.driver)
         action_chains.drag_and_drop(element, target).perform()
 
+    @allure.step('Перетаскивание элемента с одного места на другое для Firefox')
     def drag_and_drop_element(self, source_locator, target_locator):
         source_element = self.find_element_with_wait(source_locator)
         target_element = self.find_element_with_wait(target_locator)
@@ -132,6 +128,7 @@ class BasePage:
         """
         self.driver.execute_script(script, source_element, target_element)
 
+    @allure.step('Клик по кнопке для скрытых модальных окон')
     def js_button_click(self, element):
         self.driver.execute_script("arguments[0].click();", element)
 

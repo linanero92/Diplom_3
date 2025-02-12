@@ -7,7 +7,7 @@ from helpers import Generator
 
 
 
-@pytest.fixture(scope="module", params=[data.browser_chrome, data.browser_firefox])
+@pytest.fixture(params=[data.browser_chrome, data.browser_firefox])
 def driver(request):
     if request.param == data.browser_chrome:
         data.DRIVER_NAME = data.browser_chrome

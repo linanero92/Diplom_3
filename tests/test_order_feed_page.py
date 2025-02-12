@@ -1,3 +1,4 @@
+import allure
 from pages.account_page import AccountPage
 from pages.order_feed_page import OrderFeedPage
 from pages.login_page import LoginPage
@@ -6,6 +7,7 @@ from pages.main_page import MainPage
 
 class TestOrderFeedPage:
 
+    @allure.title('Проверка открытия модального окна с деталями заказа')
     def test_get_order_details(self, driver):
         main_page = MainPage(driver)
         main_page.get_feed()
@@ -14,7 +16,7 @@ class TestOrderFeedPage:
         expected_result = 'Cостав'
         assert order_feed_page.get_order_details_text() == expected_result
 
-
+    @allure.title('Проверка увеличения счётчика "Выполнено за всё время" при создании нового заказа')
     def test_order_counts_in_feed_page(self, driver, create_new_user_and_delete):
         main_page = MainPage(driver)
         main_page.click_login_button()
@@ -36,7 +38,7 @@ class TestOrderFeedPage:
         after_order = order_feed_page.get_orders_count_all_time()
         assert int(before_order) < int(after_order)
 
-
+    @allure.title('Проверка увеличения счётчика "Выполнено за сегодня" при создании нового заказа')
     def test_order_counts_today(self, driver, create_new_user_and_delete):
         main_page = MainPage(driver)
         main_page.click_login_button()
@@ -58,6 +60,7 @@ class TestOrderFeedPage:
         after_order = order_feed_page.get_orders_count_today()
         assert int(before_order) < int(after_order)
 
+    @allure.title('Проверка наличия id заказа после его создания в разделе "В работе".')
     def test_order_in_progress(self, driver, create_new_user_and_delete):
         main_page = MainPage(driver)
         main_page.click_login_button()
@@ -76,7 +79,7 @@ class TestOrderFeedPage:
         id_in_progress = order_feed_page.get_orders_in_progress()
         assert int(id_in_modal) == int(id_in_progress)
 
-
+    @allure.title('Проверка: заказы пользователя из раздела "История заказов" отображаются на странице "Лента заказов"')
     def test_history_order_in_feed_page(self, driver, create_new_user_and_delete):
         main_page = MainPage(driver)
         main_page.click_login_button()
