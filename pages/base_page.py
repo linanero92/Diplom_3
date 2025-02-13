@@ -1,8 +1,10 @@
 import allure
+
 from selenium.common import TimeoutException
 from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver import ActionChains
+import time
 
 
 class BasePage:
@@ -44,8 +46,8 @@ class BasePage:
         return self.find_element_with_wait(locator).text
 
     @allure.step('Скролл до элемента')
-    def scroll_into_view_js(self, locator):
-        self.driver.execute_script("arguments[0].scrollIntoView(true);", locator)
+    def scroll_into_view_js(self, element):
+        self.driver.execute_script("arguments[0].scrollIntoView({block: 'center'});", element)
 
     @allure.step('Ожидание исчезновения элемента из видимости')
     def wait_disappear_element(self, locator):
@@ -57,6 +59,7 @@ class BasePage:
         element = self.find_element_with_wait(locator)
         actions = ActionChains(self.driver)
         actions.move_to_element(element).perform()
+        time.sleep(0.5)
 
     @allure.step("Получение текущего URL")
     def get_current_url(self):
@@ -131,4 +134,3 @@ class BasePage:
     @allure.step('Клик по кнопке для скрытых модальных окон')
     def js_button_click(self, element):
         self.driver.execute_script("arguments[0].click();", element)
-

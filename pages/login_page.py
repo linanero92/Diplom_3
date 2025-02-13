@@ -1,9 +1,14 @@
 import allure
+
 from locators.login_page_locators import LoginPageLocators
 from pages.base_page import BasePage
 
 
 class LoginPage(BasePage):
+
+    @allure.step('Проверить наличие кнопки авторизации на странице входа')
+    def get_login_button_from_login_page(self):
+        return self.get_login_button_text()
 
     @allure.step('Кликнуть по ссылке восстановления пароля')
     def click_to_recovery_password_link(self):

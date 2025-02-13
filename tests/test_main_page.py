@@ -1,4 +1,6 @@
 import allure
+
+from pages.account_page import AccountPage
 from pages.main_page import MainPage
 from pages.login_page import LoginPage
 from pages.order_feed_page import OrderFeedPage
@@ -13,7 +15,8 @@ class TestMainPage:
         email, password, _ = create_new_user_and_delete
         login_page = LoginPage(driver)
         login_page.user_login(email, password)
-        main_page.close_modal_for_ff()
+        account_page = AccountPage(driver)
+        account_page.close_modal_for_ff()
         main_page.click_account_button()
         main_page.click_constructor_link()
         expected_result = 'Соберите бургер'
@@ -28,7 +31,8 @@ class TestMainPage:
         email, password, _ = create_new_user_and_delete
         login_page = LoginPage(driver)
         login_page.user_login(email, password)
-        main_page.close_modal_for_ff()
+        account_page = AccountPage(driver)
+        account_page.close_modal_for_ff()
         main_page.get_feed()
         main_page.get_feed()
         order_feed_page = OrderFeedPage(driver)

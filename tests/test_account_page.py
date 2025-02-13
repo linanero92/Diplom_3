@@ -1,4 +1,5 @@
 import allure
+
 import urls
 from pages.account_page import AccountPage
 from pages.main_page import MainPage
@@ -15,7 +16,7 @@ class TestAccountPage:
         login_page = LoginPage(driver)
         login_page.user_login(email, password)
         account_page = AccountPage(driver)
-        account_page.close_modal_ff_to_get_account_page()
+        account_page.close_modal_for_ff()
         main_page.click_account_button()
         expected_result = 'Выход'
 
@@ -29,7 +30,7 @@ class TestAccountPage:
         login_page = LoginPage(driver)
         login_page.user_login(email, password)
         account_page = AccountPage(driver)
-        account_page.close_modal_ff_to_get_account_page()
+        account_page.close_modal_for_ff()
         main_page.click_account_button()
         account_page.get_order_history()
         expected_result = urls.ORDER_HISTORY_URL
@@ -45,9 +46,9 @@ class TestAccountPage:
         login_page = LoginPage(driver)
         login_page.user_login(email, password)
         account_page = AccountPage(driver)
-        account_page.close_modal_ff_to_get_account_page()
+        account_page.close_modal_for_ff()
         main_page.click_account_button()
         account_page.logout_from_account()
         expected_result = 'Войти'
 
-        assert account_page.get_login_button_from_login_page() == expected_result
+        assert login_page.get_login_button_from_login_page() == expected_result

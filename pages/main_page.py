@@ -1,7 +1,7 @@
 import allure
+
 from locators.main_page_locators import MainPageLocators
 from pages.base_page import BasePage
-from pages.account_page import AccountPage
 import data
 
 
@@ -21,19 +21,6 @@ class MainPage(BasePage):
     def click_constructor_link(self):
         self.check_element_is_clickable(MainPageLocators.SEARCH_CONSTRUCTOR)
         self.click_to_element(MainPageLocators.SEARCH_CONSTRUCTOR)
-
-    @allure.step('Закрыть скрытое модальное окно в firefox')
-    def close_modal_for_ff(self):
-        account_page = AccountPage(self.driver)
-        if data.DRIVER_NAME == data.browser_firefox:
-            account_page.close_modal()
-
-    # используется в одном месте - при закрытии модального окна с заказом
-    @allure.step('Закрыть модальное окно в chrome')
-    def close_modal_for_chrome(self):
-        account_page = AccountPage(self.driver)
-        if data.DRIVER_NAME == data.browser_chrome:
-            account_page.close_modal()
 
     @allure.step('Проверить, что произошел переход на страницу конструктура')
     def check_constructor_title(self):

@@ -1,8 +1,8 @@
 import allure
+
 import data
 from locators.account_page_locators import AccountPageLocators
 from pages.base_page import BasePage
-from pages.login_page import LoginPage
 
 
 class AccountPage(BasePage):
@@ -18,9 +18,16 @@ class AccountPage(BasePage):
         except Exception as e:
             print(f"Error closing modal: {e}")
 
-    @allure.step('Закрыть скрытое модальное окно в firefox для перехода в профиль пользователя')
-    def close_modal_ff_to_get_account_page(self):
+
+    @allure.step('Закрыть скрытое модальное окно в firefox')
+    def close_modal_for_ff(self):
         if data.DRIVER_NAME == data.browser_firefox:
+            self.close_modal()
+
+    # используется в одном месте - при закрытии модального окна с заказом
+    @allure.step('Закрыть модальное окно в chrome')
+    def close_modal_for_chrome(self):
+        if data.DRIVER_NAME == data.browser_chrome:
             self.close_modal()
 
     @allure.step('Проверить наличие кнопки "Выход"')
@@ -44,11 +51,6 @@ class AccountPage(BasePage):
     @allure.step('Проверить URL страницы авторизации')
     def check_login_url(self):
         return self.get_current_url()
-
-    @allure.step('Проверить наличие кнопки авторизации на странице входа')
-    def get_login_button_from_login_page(self):
-        login_page = LoginPage(self.driver)
-        return login_page.get_login_button_text()
 
     @allure.step('Получить id заказа из истории заказов в профиле пользователя')
     def get_order_id_in_history(self):

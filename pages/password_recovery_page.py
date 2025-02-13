@@ -1,9 +1,9 @@
 import allure
+
 from helpers import Generator
 from locators.password_recovery_locators import PasswordRecoveryLocators
 from pages.base_page import BasePage
-from pages.main_page import MainPage
-from pages.login_page import LoginPage
+
 
 
 class PasswordRecoveryPage(BasePage):
@@ -20,13 +20,6 @@ class PasswordRecoveryPage(BasePage):
     @allure.step('Проверить наличие поля для ввода пароля на странице восстановления пароля')
     def check_password_recovery_field(self):
         return self.get_text_from_element(PasswordRecoveryLocators.SEARCH_RECOVERY_PASSWORD_INPUT)
-
-    @allure.step('Перейти по ссылке восстановления пароля')
-    def click_password_recovery(self):
-        main_page = MainPage(self.driver)
-        main_page.click_login_button()
-        login_page = LoginPage(self.driver)
-        login_page.click_to_recovery_password_link()
 
     @allure.step('Скрыть вводимый пароль')
     def click_password_make_visible_hidden(self):

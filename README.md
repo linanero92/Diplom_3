@@ -17,6 +17,8 @@
 
 **Установка зависимостей**
 
+> `$ pip freeze > requirements.txt`
+
 > `$ pip install -r requirements.txt`
 
 **Запуск автотестов и создание allure-отчета**
