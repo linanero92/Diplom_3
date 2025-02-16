@@ -4,7 +4,6 @@ from selenium.common import TimeoutException
 from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver import ActionChains
-import time
 
 
 class BasePage:
@@ -59,7 +58,6 @@ class BasePage:
         element = self.find_element_with_wait(locator)
         actions = ActionChains(self.driver)
         actions.move_to_element(element).perform()
-        time.sleep(0.5)
 
     @allure.step("Получение текущего URL")
     def get_current_url(self):
